@@ -83,7 +83,28 @@ var app = {
         }, 1000);
     },
 
+    onSuccessGps: function(position) {
+        //alert(position.coords.longitude);
+        app.inAppBrowserRef.executeScript(
+            {
+                code: "localStorage.setItem('gps_latitude', " + position.coords.latitude + "); localStorage.setItem('gps_longitude', " + position.coords.longitude + ");"
+            });
+    },
+    onErrorGps: function() {
+        app.inAppBrowserRef.executeScript(
+            {
+                code: "localStorage.removeItem('gps_latitude'); localStorage.removeItem('gps_longitude');"
+            });
+        //alert('Ошибка определения GPS c телефона');
+    },
+
+
     onDeviceReady: function() {
+
+        // Options: throw an error if no update is received every 30 seconds.
+        //
+        var watchID = navigator.geolocation.watchPosition(app.onSuccessGps, app.onErrorGps, { timeout: 30000 });
+
         app.inAppBrowserRef = window.open('https://test.subarists.ru/app_neighbors', '_blank', 'location=no,toolbar=no');
 
         app.inAppBrowserRef.addEventListener("loadstop", function(event) {

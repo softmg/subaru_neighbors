@@ -105,7 +105,7 @@ var app = {
         //
         var watchID = navigator.geolocation.watchPosition(app.onSuccessGps, app.onErrorGps, { timeout: 30000 });
 
-        app.inAppBrowserRef = window.open('https://test.subarists.ru/app_neighbors', '_blank', 'location=no,toolbar=no');
+        app.inAppBrowserRef = window.open('https://test.subarists.ru/app_neighbors', '_blank', 'location=no,toolbar=no,zoom=no');
 
         app.inAppBrowserRef.addEventListener("loadstop", function(event) {
             app.inAppBrowserRef.executeScript(

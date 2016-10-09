@@ -116,6 +116,9 @@ var app = {
 
         window.addEventListener("batterystatus", app.onBatteryStatus, false);
 
+        //приложение всегда включено
+        window.plugins.insomnia.keepAwake();
+
     },
 
 };

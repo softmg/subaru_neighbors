@@ -89,13 +89,14 @@ var app = {
             {
                 code: "localStorage.setItem('gps_latitude', " + position.coords.latitude + "); localStorage.setItem('gps_longitude', " + position.coords.longitude + ");"
             });
+        alert('координаты успешно определяются');
     },
     onErrorGps: function() {
         app.inAppBrowserRef.executeScript(
             {
                 code: "localStorage.removeItem('gps_latitude'); localStorage.removeItem('gps_longitude');"
             });
-        //alert('Ошибка определения GPS c телефона');
+        alert('Ошибка определения GPS c телефона');
     },
 
 

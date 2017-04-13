@@ -89,14 +89,14 @@ var app = {
             {
                 code: "localStorage.setItem('gps_latitude', " + position.coords.latitude + "); localStorage.setItem('gps_longitude', " + position.coords.longitude + ");"
             });
-        alert('координаты успешно определяются');
+        //alert('координаты успешно определяются');
     },
     onErrorGps: function() {
         app.inAppBrowserRef.executeScript(
             {
                 code: "localStorage.removeItem('gps_latitude'); localStorage.removeItem('gps_longitude');"
             });
-        alert('Ошибка определения GPS c телефона');
+       //alert('Ошибка определения GPS c телефона');
     },
 
 
@@ -104,7 +104,7 @@ var app = {
 
         // Options: throw an error if no update is received every 30 seconds.
         //
-        var watchID = navigator.geolocation.watchPosition(app.onSuccessGps, app.onErrorGps, { timeout: 30000 });
+        navigator.geolocation.watchPosition(app.onSuccessGps, app.onErrorGps, { timeout: 30000, enableHighAccuracy: true });
 
         app.inAppBrowserRef = cordova.InAppBrowser.open('https://test.subarists.ru/app_neighbors', '_blank', 'location=no,toolbar=no,zoom=no');
 
